@@ -1,0 +1,67 @@
+# main configuration #
+mode server
+
+port <%= @port %>
+proto tcp
+
+# bridging directive - this is needed to use the br0
+
+# script to attach the tap0 interface to the bridge
+<% if @device == 'tap' %>
+dev <%= @device %><%= @device_id %>
+up "/etc/openvpn/vpn-up.sh <%= @br_device %> <%= @device %><%= @device_id %>"
+down "/etc/openvpn/vpn-down.sh <%= @br_device %> <%= @device %><%= @device_id %>"
+<% else %>
+dev <%= @device %>
+<% end %>
+
+persist-key
+persist-tun
+
+#certificates and encryption
+ca <%= @ca_path %>/keys/ca.crt
+cert <%= @ca_path %>/keys/server-<%= @ca_name %>.crt
+key <%= @ca_path %>/keys/server-<%= @ca_name %>.key  # This file should be kept secret
+dh <%= @ca_path %>/keys/dh2048.pem
+crl-verify <%= @ca_path %>/keys/crl.pem
+
+cipher BF-CBC   # Blowfish (default)
+comp-lzo        # compression
+
+# enable communication between vpn clients
+client-to-client
+
+# enable multiple access from the same client certificate
+duplicate-cn
+
+# DHCP configuration #
+# ipp.txt saves the status of the dhcp leases
+ifconfig-pool-persist ipp.txt
+# pool of addresses available for VPN leases
+# format: <server IP> <netmask> <pool start IP> <pool end IP>
+<% if @device == 'tap' %>
+server-bridge <%= @server_ip %> <%= @netmask %> <%= @pool_start %> <%= @pool_end %>
+<% else %>
+server <%= @server_ip %> <%= @netmask %>
+<% end %>
+# additional option to give to dhcp clients
+push "dhcp-option DNS <%= @push_dns_ip %>"
+<% @push_route.each do |route| -%>
+<% if route.has_key?('ip') -%>
+push "route <%= route['ip'] %> <%= route['netmask'] %>"
+<% end -%>
+<% end -%>
+
+# maximium number of clients connected at a time
+max-clients <%= @max_clients %>
+
+# log and security #
+user <%= @user %>
+group <%= @group %>
+keepalive 10 120
+status openvpn-status.log
+verb 3
+script-security 3 system
+
+# main configuration #
+mode server

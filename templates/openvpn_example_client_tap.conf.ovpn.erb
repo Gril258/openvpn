@@ -1,0 +1,34 @@
+# Specify that this is a client
+client
+
+# Bridge device setting
+dev tap0
+proto tcp
+# Host name and port for the server (default port is 1194)
+# note: replace with the correct values your server set up
+remote <%= @remote %> <%= @port %>
+
+# Client does not need to bind to a specific local port
+nobind
+
+# Keep trying to resolve the host name of OpenVPN server.
+## The windows GUI seems to dislike the following rule.
+##You may need to comment it out.
+resolv-retry infinite
+# Preserve state across restarts
+persist-key
+persist-tun
+
+# SSL/TLS parameters - files created previously
+ca keys/ca.crt
+cert keys/jmeno.prijmeni@<%= @ca_name %>.crt
+key keys/jmeno.prijmeni@<%= @ca_name %>.key
+
+# Specify same cipher as server
+cipher BF-CBC
+
+# Use compression
+comp-lzo
+
+# Log verbosity (to help if there are problems)
+verb 3

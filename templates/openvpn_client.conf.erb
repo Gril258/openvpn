@@ -1,0 +1,39 @@
+# Specify that this is a client
+client
+proto tcp
+dev <%= @device %><%= @device_id %>
+# script to attach the tap0 interface to the bridge
+<% if @device == 'tap' %>
+up "/etc/openvpn/vpn-up.sh <%= @br_device %>"
+down "/etc/openvpn/vpn-down.sh <%= @br_device %>"
+<% end %>
+# Host name and port for the server (default port is 1194)
+# note: replace with the correct values your server set up
+remote <%= @remote %> <%= @port %>
+
+# Client does not need to bind to a specific local port
+nobind
+
+
+# Keep trying to resolve the host name of OpenVPN server.
+## The windows GUI seems to dislike the following rule.
+##You may need to comment it out.
+resolv-retry infinite
+# Preserve state across restarts
+persist-key
+persist-tun
+
+# SSL/TLS parameters - files created previously
+ca <%= @config_dir %>/keys/ca.crt
+cert <%= @config_dir %>/keys/<%= @certname %>.crt
+key <%= @config_dir %>/keys/<%= @certname %>.key
+user <%= @user %>
+group <%= @group %>
+# Specify same cipher as server
+cipher BF-CBC
+script-security 3 system
+# Use compression
+comp-lzo
+
+# Log verbosity (to help if there are problems)
+verb 3

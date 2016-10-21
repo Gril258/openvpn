@@ -1,0 +1,7 @@
+# this file is managed by puppet
+auto <%= @br_device %>
+iface <%= @br_device %> inet static
+  address <%= @server_ip %>
+  netmask <%= @netmask %>
+    bridge_ports none
+    bridge_fd 0

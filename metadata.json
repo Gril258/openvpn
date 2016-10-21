@@ -1,0 +1,18 @@
+    {
+      "name": "Gril258-openvpn",
+      "version": "0.0.1",
+      "author": "Martin Krutina",
+      "license": "Apache-2.0",
+      "summary": "A module for a openvpn",
+      "source": "https://github.com/Gril258/openvpn",
+      "project_page": "https://forge.puppetlabs.com/examplecorp/mymodule",
+      "issues_url": "https://github.com/examplecorp/examplecorp-mymodule/issues",
+      "tags": ["network", "openvpn", "vpn"],
+      "operatingsystem_support": [
+        {
+        "operatingsystem":"Debian",
+        "operatingsystemrelease":[ "8.0" ]
+        }
+       ],
+      "data_provider": "hiera"
+    }
