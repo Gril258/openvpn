@@ -19,7 +19,7 @@ class openvpn {
   file { '/etc/network/interfaces':
     ensure  => present,
     mode    => '0644',
-    content => template('openvpn_server/interfaces.erb'),
+    content => template('openvpn/interfaces.erb'),
   }
 
   file { '/etc/openvpn/ca':
@@ -29,13 +29,13 @@ class openvpn {
   file { '/etc/openvpn/vpn-up.sh':
     ensure  => present,
     mode    => '0755',
-    source  => "puppet:///modules/openvpn/vpn-up.sh",
+    source  => 'puppet:///modules/openvpn/vpn-up.sh',
     require => Package['openvpn'],
   }
   file { '/etc/openvpn/vpn-down.sh':
     ensure  => present,
     mode    => '0755',
-    source  => "puppet:///modules/openvpn/vpn-down.sh",
+    source  => 'puppet:///modules/openvpn/vpn-down.sh',
     require => Package['openvpn'],
   }
 
@@ -49,7 +49,7 @@ class openvpn {
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => "puppet:///modules/openvpn/mk-vpn-cert.sh"
+    source => 'puppet:///modules/openvpn/mk-vpn-cert.sh'
   }
 
   service { 'openvpn':
