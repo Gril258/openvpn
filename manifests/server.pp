@@ -45,7 +45,6 @@ define openvpn::server (
   # client specific configuration directory
   file { "/etc/openvpn/openvpn-${name}.conf.d/":
     ensure  => directory,
-    content => template('openvpn/openvpn_server.conf.erb'),
     require => Package['openvpn'],
     notify  => Service['openvpn'],
   }
