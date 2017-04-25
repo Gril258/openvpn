@@ -34,6 +34,8 @@ client-to-client
 # enable multiple access from the same client certificate
 duplicate-cn
 
+client-config-dir /etc/openvpn/openvpn-<%= @name %>.conf.d/
+
 # DHCP configuration #
 # ipp.txt saves the status of the dhcp leases
 ifconfig-pool-persist ipp.txt
