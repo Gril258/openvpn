@@ -50,7 +50,7 @@ server <%= @server_ip %> <%= @netmask %>
 push "dhcp-option DNS <%= @push_dns_ip %>"
 <% @push_route.each do |route| -%>
 <% if route.has_key?('ip') -%>
-push "route <%= route['ip'] %> <%= route['netmask'] %> <% if route.has_key?('metric') -%><%= route['metric'] %><% end -%>"
+push "route <%= route['ip'] %> <%= route['netmask'] %> <% if route.has_key?('metric') -%> <%= @server_ip %> <%= route['metric'] %><% end -%>"
 <% end -%>
 <% end -%>
 
