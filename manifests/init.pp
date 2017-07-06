@@ -63,6 +63,6 @@ class openvpn {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('openvpn/openvpn@server.erb')
+    content => template('openvpn/openvpn@service.erb')
   }
 }
