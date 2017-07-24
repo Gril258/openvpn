@@ -58,11 +58,12 @@ class openvpn {
     require => Package['openvpn'],
   }
   # openvpn systemd services files, original but updated for restart and restart always
-  file { '/lib/systemd/system/openvpn@service':
+  file { '/lib/systemd/system/openvpn@.service':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('openvpn/openvpn@service.erb')
+    content => template('openvpn/openvpn@.service.erb'),
+    require => Package['openvpn'],
   }
 }
