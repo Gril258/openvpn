@@ -23,7 +23,8 @@ class openvpn {
   }
   # create directory for certificate authority
   file { '/etc/openvpn/ca':
-    ensure => 'directory',
+    ensure  => 'directory',
+    require => Package['openvpn']
   }
   # shell script for create vpn device and connect it to bridge
   file { '/etc/openvpn/vpn-up.sh':

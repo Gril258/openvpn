@@ -38,13 +38,13 @@ client-config-dir /etc/openvpn/openvpn-<%= @name %>.conf.d/
 
 # DHCP configuration #
 # ipp.txt saves the status of the dhcp leases
-ifconfig-pool-persist ipp.txt
+#ifconfig-pool-persist /etc/openvpn/openvpn-<%= @name %>.conf.d/ipp.txt
 # pool of addresses available for VPN leases
 # format: <server IP> <netmask> <pool start IP> <pool end IP>
 <% if @device == 'tap' %>
 server-bridge <%= @server_ip %> <%= @netmask %> <%= @pool_start %> <%= @pool_end %>
 <% else %>
-server <%= @server_ip %> <%= @netmask %>
+server <%= @server_ip %>
 <% end %>
 # additional option to give to dhcp clients
 push "dhcp-option DNS <%= @push_dns_ip %>"
@@ -63,7 +63,4 @@ group <%= @group %>
 keepalive 10 120
 status openvpn-status.log
 verb 3
-script-security 3 system
-
-# main configuration #
-mode server
+#script-security 3 system
