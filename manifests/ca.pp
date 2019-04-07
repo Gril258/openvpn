@@ -45,6 +45,15 @@ define openvpn::ca (
     source  => 'puppet:///modules/openvpn/openssl.cnf',
     require => Exec["copy-easy-rsa-${name}"],
   }
+
+  file { "/etc/openvpn/ca/${name}/easy-rsa/openssl.cnf":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openvpn/openssl.cnf',
+    require => Exec["copy-easy-rsa-${name}"],
+  }
   # set $PATH for exec
   Exec {
       path => [ '/sbin', '/bin', '/usr/sbin', '/usr/bin' ],
