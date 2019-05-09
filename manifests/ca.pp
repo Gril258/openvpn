@@ -83,6 +83,14 @@ define openvpn::ca (
     provider => 'shell',
     require  => Exec["generate-cert-${name}"]
   }
+
+  cron { "cron-refresh-crl.pem-${name}":
+    command  => "/bin/rm /etc/openvpn/ca/${name}/easy-rsa/keys/crl.pem",
+    user     => 'root',
+    hour     => 2,
+    minute   => 0,
+    monthday => 2,
+  }
   # diffle helmans cyphre generate
   exec { "generate-dh-${name}":
     command  => '. ./vars && ./clean-all && ./build-dh',
