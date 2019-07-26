@@ -34,6 +34,7 @@ define openvpn::server (
       remote       => $remote,
       device       => $device,
       device_id    => $device_id,
+      port         => $port,
     }
   }
   # main server config file
