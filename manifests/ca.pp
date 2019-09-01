@@ -85,11 +85,11 @@ define openvpn::ca (
   }
 
   cron { "cron-refresh-crl.pem-${name}":
-    command  => "/bin/rm /etc/openvpn/ca/${name}/easy-rsa/keys/crl.pem",
-    user     => 'root',
-    hour     => 2,
-    minute   => 0,
-    monthday => 2,
+    command => "/bin/rm /etc/openvpn/ca/${name}/easy-rsa/keys/crl.pem",
+    user    => 'root',
+    hour    => 2,
+    minute  => 0,
+    weekday => 0,
   }
   # diffle helmans cyphre generate
   exec { "generate-dh-${name}":
