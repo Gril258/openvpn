@@ -1,4 +1,6 @@
-class openvpn {
+class openvpn (
+    $manage_interafces = 'yes',
+  ){
   # main openvpn package
   package { 'openvpn':
     ensure => 'latest',
@@ -15,11 +17,13 @@ class openvpn {
   package { 'rar':
     ensure => 'latest',
   }
+  if $manage_interafces == 'yes' {
   # configure main network file
-  file { '/etc/network/interfaces':
-    ensure  => present,
-    mode    => '0644',
-    content => template('openvpn/interfaces.erb'),
+    file { '/etc/network/interfaces':
+      ensure  => present,
+      mode    => '0644',
+      content => template('openvpn/interfaces.erb'),
+    }
   }
   # create directory for certificate authority
   file { '/etc/openvpn/ca':
