@@ -1,5 +1,5 @@
 class openvpn (
-    $manage_interafces = 'yes',
+    $manage_interfaces = 'yes',
   ){
   # main openvpn package
   package { 'openvpn':
@@ -17,7 +17,7 @@ class openvpn (
   package { 'rar':
     ensure => 'latest',
   }
-  if $manage_interafces == 'yes' {
+  if $manage_interfaces == 'yes' {
   # configure main network file
     file { '/etc/network/interfaces':
       ensure  => present,
