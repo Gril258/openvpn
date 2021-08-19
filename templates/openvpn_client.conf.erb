@@ -30,7 +30,7 @@ key <%= @config_dir %>/keys/<%= @certname %>.key
 user <%= @user %>
 group <%= @group %>
 # Specify same cipher as server
-cipher BF-CBC
+cipher <%= @cipher %>
 script-security 3
 # Use compression
 comp-lzo

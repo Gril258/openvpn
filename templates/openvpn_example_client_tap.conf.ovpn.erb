@@ -25,7 +25,7 @@ cert keys/jmeno.prijmeni@<%= @name %>.crt
 key keys/jmeno.prijmeni@<%= @name %>.key
 
 # Specify same cipher as server
-cipher BF-CBC
+cipher <%= @cipher %>
 
 # Use compression
 comp-lzo

@@ -16,6 +16,7 @@ define openvpn::ca (
     $pkcs11_module_path = 'dummy',
     $pkcs11_pin = 'dummy',
     $port = '1194',
+    $cipher = 'BF-CBC',
 ) {
   # create copy of easy rsa directory - this will create main certificate authority directory
   exec { "copy-easy-rsa-${name}":

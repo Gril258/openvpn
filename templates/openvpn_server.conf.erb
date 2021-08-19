@@ -25,7 +25,8 @@ key <%= @ca_path %>/keys/server-<%= @ca_name %>.key  # This file should be kept 
 dh <%= @ca_path %>/keys/dh2048.pem
 crl-verify <%= @ca_path %>/keys/crl.pem
 
-cipher BF-CBC   # Blowfish (default)
+
+cipher <%= @cipher %>
 comp-lzo        # compression
 
 # enable communication between vpn clients

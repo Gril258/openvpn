@@ -20,6 +20,7 @@ define openvpn::server (
     $push_dns_ip = undef,
     $push_route = [],
     $script_security = '3',
+    $cipher = 'BF-CBC',
   ){
   # directory for certificate authority called ca_name
   $ca_path = "/etc/openvpn/ca/${ca_name}/easy-rsa"
@@ -35,6 +36,7 @@ define openvpn::server (
       device       => $device,
       device_id    => $device_id,
       port         => $port,
+      cipher       => $cipher,
     }
   }
   # main server config file

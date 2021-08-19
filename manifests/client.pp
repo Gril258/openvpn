@@ -11,6 +11,7 @@ define openvpn::client (
     $group = 'nogroup',
     $max_clients = '200',
     $push_dns_ip = undef,
+    $cipher = 'BF-CBC',
   ){
   # directory for certificate authority called ca_name
   $config_dir = "/etc/openvpn/openvpn-${name}-conf.d"
