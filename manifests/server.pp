@@ -21,6 +21,7 @@ define openvpn::server (
     $push_route = [],
     $script_security = '3',
     $cipher = 'BF-CBC',
+    $status_log_path = "openvpn-status-${name}.log",
   ){
   # directory for certificate authority called ca_name
   $ca_path = "/etc/openvpn/ca/${ca_name}/easy-rsa"

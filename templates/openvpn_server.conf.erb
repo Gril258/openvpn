@@ -45,7 +45,8 @@ client-config-dir /etc/openvpn/openvpn-<%= @name %>.conf.d/
 <% if @device == 'tap' %>
 server-bridge <%= @server_ip %> <%= @netmask %> <%= @pool_start %> <%= @pool_end %>
 <% else %>
-server <%= @server_ip %>
+server <%= @server_ip %> <%= @netmask %>
+tls-server
 <% end %>
 # additional option to give to dhcp clients
 push "dhcp-option DNS <%= @push_dns_ip %>"
@@ -62,6 +63,6 @@ max-clients <%= @max_clients %>
 user <%= @user %>
 group <%= @group %>
 keepalive 10 120
-status openvpn-status.log
+status <%= @status_log_path %>
 verb 3
 script-security <%= @script_security %>
